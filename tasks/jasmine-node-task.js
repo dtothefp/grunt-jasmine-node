@@ -36,6 +36,14 @@ module.exports = function (grunt) {
         growl: false
       });
 
+      if(options.globals) {
+        Object.keys(options.globals).forEach(function(key) {
+          global[key] = options.globals[key];
+        });
+
+        delete options.globals;
+      }
+
       function processPaths(fileName, specFolder, specFolders) {
          if(specFolder[0] === '/') {
           specFolder = specFolder.subst(1);
@@ -112,7 +120,7 @@ module.exports = function (grunt) {
         var consoleReporter = new jasmine.ConsoleReporter({
           showColors: true,
           print: function() {
-            console.log.apply(console, arguments)
+            console.log.apply(console, arguments);
           }
         });
 
